@@ -1,7 +1,7 @@
 from peewee import SqliteDatabase, Model, CharField, AutoField
 
-db = SqliteDatabase('my_database.db')
 
+db = SqliteDatabase('my_database.db')
 
 
 class BaseModel(Model):

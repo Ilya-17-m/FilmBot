@@ -1,23 +1,13 @@
+import requests
 from peewee import IntegrityError
 from telebot import TeleBot, StateMemoryStorage
 from telebot.custom_filters import StateFilter
 from telebot.types import Message, BotCommand
 from typing import Dict
-import requests
 
 from models import User, create_model
-from filmbot.config import BOT_TOKEN, DEFAULT_COMMAND, API_KEY
+from config import BOT_TOKEN, DEFAULT_COMMAND, API_KEY
 
-"""
-    Папка main.py - является проектом по созданию телеграмм бота, который помогает пользователю выбрать фильм по отдельно созданным коммандам.
-    Телеграмм бот называется - MovieFinderBot, пользователи его могут найти, как - TG_movie_finder_bot.
-
-    Импорты из проектов:
-        Импорт из папки models: User; create_model - User позволяет создать или другими словами зарегестрировать пользователя; create_model -
-        функция, которая создаёт модель пользователя.
-
-        Импорт из папки config: BOT_TOKEN; DEFAULT_COMMAND; API_KEY
-"""
 
 bot = TeleBot(BOT_TOKEN, state_storage=StateMemoryStorage())
 
@@ -61,7 +51,6 @@ def movie_search(message: Message) -> None:
     bot.register_next_step_handler(message, name_film)
 
 
-
 @bot.message_handler(commands=['movie_by_rating'])
 def movie_by_rating(message: Message) -> None:
     url: str = 'https://api.kinopoisk.dev/v1.4/movie/search?page=1&limit=10'
@@ -101,17 +90,12 @@ def low_budget_movie(message: Message) -> None:
     bot.register_next_step_handler(message, small_budget)
 
 
-
-
-
 @bot.message_handler(commands=['high_budget_movie'])
 def high_budget_movie(message: Message) -> None:
     bot.send_message(message.from_user.id, 'Укажите диапозон суммы, которой вы бы хотели найти фильм/сериал '
                                            '\nможете указать диапазон через -. Например: 1000-5000. '
                                            '\nИли же конкретное число, например: 15000')
     bot.register_next_step_handler(message, big_budget)
-
-
 
 
 @bot.message_handler(commands=['history'])
@@ -124,7 +108,7 @@ def user_history(message: Message) -> None:
 
 
 def small_budget(message: Message) -> None:
-    price: str = message.text
+    price = message.text
     url: str = f"https://api.kinopoisk.dev/v1.4/movie?page=1&limit=10&budget.value={price}"
     headers: Dict = {
         "accept": "application/json",
@@ -157,7 +141,7 @@ def small_budget(message: Message) -> None:
 
 
 def big_budget(message: Message) -> None:
-    price: str = message.text
+    price = message.text
     url: str = f"https://api.kinopoisk.dev/v1.4/movie?page=1&limit=10&budget.value={price}"
     headers: Dict = {
         "accept": "application/json",
@@ -189,7 +173,7 @@ def big_budget(message: Message) -> None:
 
 
 def name_film(message: Message) -> None:
-    names: str = message.text
+    names = message.text
     headers: Dict = {"X-API-KEY": API_KEY}
     params: Dict = {"query": names, "limit": 1}
     response = requests.get('https://api.kinopoisk.dev/v1.4/movie/search', headers=headers, params=params)

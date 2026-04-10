@@ -1,0 +1,20 @@
+[project]
+name = "filmbot"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "user",email = "ilya.melnichuk.2007@mail.ru"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "peewee (>=4.0.4,<5.0.0)",
+    "pytelegrambotapi (>=4.32.0,<5.0.0)",
+    "requests (>=2.33.1,<3.0.0)",
+    "python-dotenv (>=1.2.2,<2.0.0)"
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"

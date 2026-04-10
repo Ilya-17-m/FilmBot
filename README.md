@@ -13,7 +13,7 @@
 
 + Python
 + PyTelegramBotAPI
-+ Pewee
++ Peewee
 
 
 
@@ -25,7 +25,7 @@
 
 ### Установка зависимостей:
 #### Для установки всез зависимостей  выполните команду:
-``pip install -r requirements.txt``
+``poetry install``
 
 
 ### Команда проекта:

@@ -1,12 +1,11 @@
-from dotenv import load_dotenv
 import os
+from dotenv import load_dotenv
 
 
 load_dotenv()
+
 API_KEY = os.getenv("API_KEY")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
-
-
 
 DEFAULT_COMMAND = [
     ('movie_search', 'Поиск фильма/сериала по названию'),
@@ -14,5 +13,4 @@ DEFAULT_COMMAND = [
     ('low_budget_movie', 'Поиск фильма/сериала с низким бюджетом'),
     ('high_budget_movie', 'Поиск фильма/сериала с высоким бюджетом'),
     ('history', 'История поисков и запросов')
-
 ]
